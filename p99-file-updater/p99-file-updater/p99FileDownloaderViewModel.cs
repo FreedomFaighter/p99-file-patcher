@@ -38,7 +38,7 @@ namespace p99FileUpdater
         private async void DownloadFile()
         {
             if (MessageBox != String.Empty)
-                MessageBox = String.Empty;
+            MessageBox = String.Empty;
             WriteToTextBoxWithString($"Operation Enabled: {OperationEnabled.ToString()}");
             if (OperationEnabled == false)
                 OperationEnabled = true;
