@@ -1,0 +1,27 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Hello World Universal Windows Platform
+
+on:
+  push:
+    branches-ignore:
+    - 'master'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      HWTestLibraryPath: '.\Hello-World\Hello-World-NUnit-Test\bin\x64\Release\Hello-World-NUnit-Test.exe'
+    steps:
+      - name: Checkout repostory
+        uses: actions/checkout@v3
+      - name: Setup MSBuild v1.1
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build App
+        run: msbuild -property:Configuration=Release Hello-World/Hello-World.sln /restore
+      - name: Test App
+        run: ${{env.HWTestLibraryPath}}
+
