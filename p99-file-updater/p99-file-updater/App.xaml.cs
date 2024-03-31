@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace HelloWorld
+namespace p99FileUpdater
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

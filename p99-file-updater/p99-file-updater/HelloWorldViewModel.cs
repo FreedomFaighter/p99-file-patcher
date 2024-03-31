@@ -1,17 +1,32 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
-namespace HelloWorld
+namespace p99FileUpdater
 {
     [Bindable(BindableSupport.Yes)]
     public class HelloWorldViewModel : INotifyPropertyChanged
     {
+        private p99FileUpdaterView p99fuv = new p99FileUpdaterView();
+
+        public ICommand SetHelloWorldCommand { get; }
+        public ICommand SetTextBoxClear { get; }
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public HelloWorldViewModel()
         {
-            helloWorldMessage = String.Empty;
+            SetHelloWorldCommand = new RelayCommand.RelayCommand(() =>
+                {
+                    HelloWorldMessage = $"{ p99fuv.strHello} {p99fuv.strWorld}";
+                    MessageDisplayed = true;
+                });
+            SetTextBoxClear = new RelayCommand.RelayCommand(() =>
+                {
+                    HelloWorldMessage = String.Empty;
+                    MessageDisplayed = false;
+                });
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
