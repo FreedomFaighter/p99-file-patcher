@@ -158,7 +158,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hello-World\Hello-World.csproj">
+    <ProjectReference Include="..\p99-file-updater\p99-file-updater.csproj">
       <Project>{37099ca7-0b63-4267-9a72-df8fc094cf63}</Project>
       <Name>Hello-World</Name>
     </ProjectReference>
