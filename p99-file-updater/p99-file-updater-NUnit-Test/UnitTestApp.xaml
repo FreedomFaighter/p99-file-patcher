@@ -1,7 +1,7 @@
 ﻿<Application
-    x:Class="Hello_World_NUnit_Test.App"
+    x:Class="p99_file_updater_NUnit_Test.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Hello_World_NUnit_Test">
+    xmlns:local="using:p99_file_updater_NUnit_Test">
 
 </Application>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HelloWorld;
+using p99FileUpdater;
 
-namespace Hello_World_NUnit_Test
+namespace p99_file_updater_NUnit_Test
 {
     [TestClass]
     public class HelloWorldViewModelTests

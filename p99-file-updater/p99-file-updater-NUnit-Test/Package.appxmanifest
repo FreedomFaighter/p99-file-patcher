@@ -12,7 +12,7 @@
   <mp:PhoneIdentity PhoneProductId="40e03bef-c982-48d6-86ae-29e4e4a16f0a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Hello-World-NUnit-Test</DisplayName>
+    <DisplayName>p99-file-updater-NUnit-Test</DisplayName>
     <PublisherDisplayName>John H. Freeman</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -27,12 +27,12 @@
   <Applications>
     <Application Id="vstest.executionengine.universal.App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="Hello_World_NUnit_Test.App">
+        EntryPoint="p99_file_updater_NUnit_Test">
       <uap:VisualElements
-        DisplayName="Hello-World-NUnit-Test"
+        DisplayName="p99_file_updater-NUnit-Test"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Hello-World-NUnit-Test"
+        Description="p99_file_updater-NUnit-Test"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
           <uap:ShowNameOnTiles>

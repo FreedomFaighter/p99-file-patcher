@@ -27,6 +27,7 @@ namespace p99FileUpdater
                     HelloWorldMessage = String.Empty;
                     MessageDisplayed = false;
                 });
+            SetTextBoxClear.Execute(null);
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)

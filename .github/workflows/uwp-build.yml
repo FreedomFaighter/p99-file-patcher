@@ -21,7 +21,6 @@ jobs:
       - name: Setup MSBuild v1.1
         uses: microsoft/setup-msbuild@v1.1
       - name: Build App
-        run: msbuild -property:Configuration=Release Hello-World/Hello-World.sln /restore
+        run: msbuild -property:Configuration=Release p99-file-updater/p99-file-updater.sln /restore
       - name: Test App
         run: ${{env.HWTestLibraryPath}}
-

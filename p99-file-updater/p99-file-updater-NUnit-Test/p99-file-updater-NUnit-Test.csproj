@@ -7,8 +7,8 @@
     <ProjectGuid>{5703224D-37B2-4669-92B1-00B7E5105923}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hello_World_NUnit_Test</RootNamespace>
-    <AssemblyName>Hello-World-NUnit-Test</AssemblyName>
+    <RootNamespace>p99_file_updater_NUnit_Test</RootNamespace>
+    <AssemblyName>p99-file-updater-NUnit-Test</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
@@ -151,16 +151,16 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter">
-      <Version>2.2.7</Version>
+      <Version>3.2.2</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestFramework">
-      <Version>2.2.7</Version>
+      <Version>3.2.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\p99-file-updater\p99-file-updater.csproj">
       <Project>{37099ca7-0b63-4267-9a72-df8fc094cf63}</Project>
-      <Name>Hello-World</Name>
+      <Name>p99-file-updater</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

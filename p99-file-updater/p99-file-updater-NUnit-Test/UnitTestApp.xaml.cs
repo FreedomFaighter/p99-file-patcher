@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Hello_World_NUnit_Test
+namespace p99_file_updater_NUnit_Test
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
