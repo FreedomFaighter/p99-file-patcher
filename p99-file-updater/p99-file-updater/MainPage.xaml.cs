@@ -1,6 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -11,18 +9,13 @@ namespace p99FileUpdater
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private HelloWorldViewModel HelloWorldVM { get; set; }
+        private p99FileDownloaderViewModel p99downloaderviewmodel { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-            HelloWorldVM = new HelloWorldViewModel();
-            HelloWorldVM.MessageDisplayed = false;
-        }
 
-        private bool NegateBool(bool TFValue)
-        {
-            return !TFValue;
+            p99downloaderviewmodel = new p99FileDownloaderViewModel();
         }
     }
 }

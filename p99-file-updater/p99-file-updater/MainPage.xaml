@@ -4,15 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:p99FileUpdater"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DataContext="{d:DesignInstance Type=local:HelloWorldViewModel}"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Height="1055" Width="1083">
 
-    <Grid RenderTransformOrigin="0.448,0.153">
-        <TextBox x:Name="txtHelloWorld" HorizontalAlignment="Left" Margin="177,114,0,0" TextWrapping="Wrap" Text="{x:Bind HelloWorldVM.HelloWorldMessage, Mode=OneWay}" VerticalAlignment="Top" Height="86" Width="462" RenderTransformOrigin="0.514,0.55" IsReadOnly="True" />
-        <Button x:Name="Show_Hello_World" Content="Show Hello World" Margin="177,304,0,0" VerticalAlignment="Top" Height="111" Width="435" IsEnabled="{x:Bind NegateBool(HelloWorldVM.MessageDisplayed), Mode=OneWay}" Command="{x:Bind HelloWorldVM.SetHelloWorldCommand}"/>
-        <Button x:Name="Clear_Text" Content="Clear Text" Margin="177,500,0,0" VerticalAlignment="Top" Height="130" Width="435" IsEnabled="{x:Bind HelloWorldVM.MessageDisplayed, Mode=OneWay}" Command="{x:Bind HelloWorldVM.SetTextBoxClear}"/>
-        <ProgressBar HorizontalAlignment="Left" Height="49" Margin="697,415,0,0" VerticalAlignment="Top" Width="381"/>
-
+    <Page.Resources>
+        <local:p99FileDownloaderViewModel x:Key="p99FileDownloaderViewModel" />
+    </Page.Resources>
+    <Grid x:Name="File_Downloader_Page" RenderTransformOrigin="0.448,0.153" Margin="0,0,10,10" DataContext="{StaticResource p99FileDownloaderViewModel}">
+        <TextBox x:Name="txtHelloWorld" HorizontalAlignment="Left" Margin="177,64,0,0" TextWrapping="Wrap" Text="{Binding MessageBox, Mode=OneWay}" VerticalAlignment="Top" Height="136" Width="435" RenderTransformOrigin="0.503,0.594" IsReadOnly="True" Header="Status" />
+        <Button x:Name="Download_Files" Content="Download Project 1999 Update files" Margin="177,212,0,0" VerticalAlignment="Top" Height="39" Width="435" Command="{Binding DownloadFromSetURI}" IsTabStop="True" TabIndex="1"/>
+        <TextBox HorizontalAlignment="Left" Margin="177,488,0,0" Text="{Binding ChecksumHashFromFileUrl, Mode=OneWay}" VerticalAlignment="Top" Width="656" IsReadOnly="True" Height="55" Header="Remote File SHA256" TabIndex="2" InputScope="Text" />
+        <CheckBox Content="Override Checksum Validation" IsChecked="{Binding OverrideChecksumValidation, Mode=OneWay}" Margin="811,659,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="177,406,0,0" Text="{Binding Mode=TwoWay, Path=EQDirectoryPath}" VerticalAlignment="Top" Width="435" IsReadOnly="False" Height="55" Header="EverQuest Directory" TabIndex="3" InputScope="Text" />
+        <TextBox HorizontalAlignment="Left" Margin="177,306,0,0" Text="{Binding Mode=TwoWay, Path=UrlToDownloadFrom}" VerticalAlignment="Top" Width="435" IsReadOnly="False" Height="61" Header="URL" TabIndex="9" InputScope="Text" />
+        <TextBox HorizontalAlignment="Left" Margin="177,576,0,0" Text="{Binding Mode=TwoWay, Path=ChecksumHashFromApp}" VerticalAlignment="Top" Width="656" IsReadOnly="False" Height="55" Header="Provided SHA256" TabIndex="4" InputScope="Text" />
     </Grid>
 </Page>

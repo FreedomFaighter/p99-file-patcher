@@ -6,22 +6,22 @@ namespace p99_file_updater_NUnit_Test
     [TestClass]
     public class HelloWorldViewModelTests
     {
-        HelloWorldViewModel hw;
+        p99FileDownloaderViewModel hw;
 
         [TestInitialize]
         public void initializeTest()
         {
-            hw = new HelloWorldViewModel();
+            hw = new p99FileDownloaderViewModel();
         }
         [TestCategory("MessageStringTests")]
         [TestMethod]
         public void TestHelloWorldMessageProperty()
         {
-            Assert.AreEqual(hw.HelloWorldMessage, string.Empty);
+            Assert.AreEqual(hw.MessageBox, string.Empty);
             const string msg = "Test String";
-            hw.HelloWorldMessage = msg;
-            Assert.AreEqual(hw.HelloWorldMessage, msg);
-            Assert.AreNotEqual(hw.HelloWorldMessage, null);
+            hw.MessageBox = msg;
+            Assert.AreEqual(hw.MessageBox, msg);
+            Assert.AreNotEqual(hw.MessageBox, null);
         }
 
         [TestCategory("MessageDisplayedTests")]

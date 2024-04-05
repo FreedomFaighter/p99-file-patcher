@@ -1,14 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 
 namespace p99FileUpdater
 {
     public class p99FileUpdaterView
     {
-        readonly internal string strHello = "Hello";
-        readonly internal string strWorld = "World";
+        public String UpdateFileURI;
+
+        public String EQDirectoryPath;
+
+        //Dictionary<String, Tuple<String, String>> listOfFilesFromURI { get; set; }
+
+        public String checksumHashFromFileUrl;
+
+        public String checksumHashFromApp;
+
+        public bool? overrideChecsumValidation = false;
+
+        public bool? messageDisplayed = false;
+
+        public String messages = String.Empty;
+
+        public Hashtable fileAndChecksum = new Hashtable();
     }
 }
