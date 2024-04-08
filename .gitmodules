@@ -5,3 +5,8 @@
 [submodule "p99-file-updater/p99-file-updater/libgit2sharp"]
 	path = p99-file-updater/p99-file-updater/libgit2sharp
 	url = https://github.com/FreedomFaighter/libgit2sharp.git
+	branch = master
+
+[submodule "libgit2sharp"]
+	path = libgit2sharp
+	url = https://github.com/FreedomFaighter/libgit2sharp.git
