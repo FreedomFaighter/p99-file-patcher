@@ -1,5 +1,5 @@
 [submodule "p99-file-updater/p99-file-updater/RelayCommand"]
-	path = p99-file-updater/p99-file-updater/RelayCommand
+	path = RelayCommand
 	url = https://github.com/FreedomFaighter/RelayCommand.git
 	branch = ms-example
 
