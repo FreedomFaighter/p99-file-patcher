@@ -25,10 +25,10 @@ namespace p99FileUpdater
         private async void DownloadFile()
         {
             WriteToTextBoxWithString("creating httpclient");
-            HttpClient client = new HttpClient();
+            client = new HttpClient();
 
             WriteToTextBoxWithString("creating Uri Object");
-            Uri downloadAddress = new Uri(UrlToDownloadFrom);
+            downloadAddress = new Uri(UrlToDownloadFrom);
             try
             {
                 WriteToTextBoxWithString("creating stream object");
@@ -114,5 +114,9 @@ namespace p99FileUpdater
         public string ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
 
         public bool? OverrideChecksumValidation { get => p99fuv.overrideChecsumValidation; set => SetProperty(ref p99fuv.overrideChecsumValidation, value); }
+
+        public Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
+
+        public HttpClient DownloadClient { get => p99fuv.downloadClient; set => SetProperty(ref p99fuv.downloadClient, value); }
     }
 }

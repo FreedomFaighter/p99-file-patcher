@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.IO;
+using System.Net.Http;
 
 namespace p99FileUpdater
 {
@@ -23,5 +25,11 @@ namespace p99FileUpdater
         public String messages = String.Empty;
 
         public Hashtable fileAndChecksum = new Hashtable();
+
+        public MemoryStream memoryStream;
+
+        public Uri downloadAddress;
+
+        public HttpClient downloadClient;
     }
 }
