@@ -25,14 +25,14 @@ namespace p99FileUpdater
         private async void DownloadFile()
         {
             WriteToTextBoxWithString("creating httpclient");
-            client = new HttpClient();
+            DownloadClient = new HttpClient();
 
             WriteToTextBoxWithString("creating Uri Object");
-            downloadAddress = new Uri(UrlToDownloadFrom);
+            DownloadAddress = new Uri(UrlToDownloadFrom);
             try
             {
                 WriteToTextBoxWithString("creating stream object");
-                using (Stream response = await client.GetStreamAsync(downloadAddress))
+                using (Stream response = await DownloadClient.GetStreamAsync(DownloadAddress))
                 {
                     MemoryStream memoryStream = new MemoryStream();
                     await response.CopyToAsync(memoryStream);
@@ -40,13 +40,7 @@ namespace p99FileUpdater
 
                     using (SHA256 memorySha = SHA256.Create())
                     {
-                        StringBuilder stringBuilderForChecksum = new StringBuilder();
-                        byte[] hashArray = memorySha.ComputeHash(memoryStream.ToArray());
-                        foreach (byte b in hashArray)
-                            stringBuilderForChecksum.Append(b.ToString("x2"));
-                        ChecksumHashFromFileUrl = stringBuilderForChecksum.ToString();
-
-                        WriteToTextBoxWithString(ChecksumHashFromFileUrl);
+                        ChecksumHashFromFileUrl = memorySha.ComputeHash(memoryStream.ToArray());
 
                         if (OverrideChecksumValidation.HasValue ? !OverrideChecksumValidation.Value : false)
                         {
@@ -56,7 +50,8 @@ namespace p99FileUpdater
                             }
                             else
                             {
-                                WriteToTextBoxWithString("Checksum values from hashed file match do not match");
+                                WriteToTextBoxWithString("Checksum values from hashed file match do not match, exiting download and validation.");
+                                return;
                             }
                         }
 
@@ -109,11 +104,11 @@ namespace p99FileUpdater
         public string EQDirectoryPath { get => p99fuv.EQDirectoryPath; set => SetProperty(ref p99fuv.EQDirectoryPath, value); }
         public string UrlToDownloadFrom { get => p99fuv.UpdateFileURI; set => SetProperty(ref p99fuv.UpdateFileURI, value); }
 
-        public String ChecksumHashFromFileUrl { get => p99fuv.checksumHashFromFileUrl; set => SetProperty(ref p99fuv.checksumHashFromFileUrl, value); }
+        public byte[] ChecksumHashFromFileUrl { get => p99fuv.checksumHashFromFileUrl; set => SetProperty(ref p99fuv.checksumHashFromFileUrl, value); }
 
-        public string ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
+        public byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
 
-        public bool? OverrideChecksumValidation { get => p99fuv.overrideChecsumValidation; set => SetProperty(ref p99fuv.overrideChecsumValidation, value); }
+        public bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
 
         public Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
 
