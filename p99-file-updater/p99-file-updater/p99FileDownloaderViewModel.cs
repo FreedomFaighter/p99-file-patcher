@@ -54,15 +54,29 @@ namespace p99FileUpdater
                                 return;
                             }
                         }
-
-                        memoryStream.Position = 0;
+                        //memoryStream is reset to position zero to be read as zip archive after checksuming
+                        setStreamAtInitialPosition(ref memoryStream);
 
                         ZipArchive za = new ZipArchive(memoryStream, ZipArchiveMode.Read);
 
                         foreach (ZipArchiveEntry zae in za.Entries)
                         {
-                            p99fuv.fileAndChecksum.Add(zae.FullName, memorySha.ComputeHash(zae.Open()));
+                            byte[] fileInMemoryHash = memorySha.ComputeHash(zae.Open());
                             WriteToTextBoxWithString(String.Join(":", "Zip Entry", zae.FullName));
+                            String currentFilePath = Path.Combine($"{EQDirectoryPath}{Path.DirectorySeparatorChar}{zae.FullName}");
+                            if (Directory.Exists(EQDirectoryPath) && File.Exists(currentFilePath))
+                            {
+                                byte[] currentByteHash = SHA256.Create().ComputeHash(new FileStream(currentFilePath, FileMode.Open, FileAccess.Read));
+                                if (!fileInMemoryHash.Equals(currentByteHash))
+                                {
+                                    WriteToTextBoxWithString(String.Format("{1} checksum does not match", zae.FullName));
+                                    zae.Open().CopyTo((new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write)));
+                                }
+                                else
+                                {
+                                    WriteToTextBoxWithString(String.Format("{1} checksum matches, not writing to file"));
+                                }
+                            }
                         }
                     }
                     WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
@@ -74,7 +88,13 @@ namespace p99FileUpdater
             {
                 MessageBox = ex.Message;
             }
+
+            void setStreamAtInitialPosition(ref MemoryStream stream)
+            {
+                stream.Position = 0;
+            }
         }
+
         public p99FileDownloaderViewModel()
         {
             DownloadFromSetURI = new RelayCommand(() => DownloadFile());

@@ -11,9 +11,7 @@ namespace p99FileUpdater.Converters
     {
         public new bool CanConvertTo(Type destinationType)
         {
-            if (destinationType == null)
-                throw new ArgumentNullException("destinationType null");
-            else if (destinationType.Equals(typeof(byte[])))
+            if (destinationType.Equals(typeof(byte[])))
                 return true;
             else
                 return false;
@@ -23,7 +21,8 @@ namespace p99FileUpdater.Converters
         {
             if (destinationType.Equals(typeof(byte[])))
                 return true;
-            return base.CanConvertTo(context, destinationType);
+            else
+                return false;
         }
 
         public new bool CanConvertFrom(Type sourceType)
@@ -38,10 +37,11 @@ namespace p99FileUpdater.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-      
+
             if (sourceType.Equals(typeof(String)))
                 return true;
-            return base.CanConvertFrom(context, sourceType);
+            else
+                return false;
         }
 
         public new object ConvertTo(object value, Type destinationType) => ConvertTo((byte[])value);
