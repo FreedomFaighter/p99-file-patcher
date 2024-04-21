@@ -9,30 +9,42 @@ namespace p99FileUpdater.Converters
 {
     internal class ChecksumByteToStringConverter : StringConverter
     {
-        public bool CanConvertTo(Type? destinationType)
+        public new bool CanConvertTo(Type destinationType)
         {
-            return base.CanConvertTo(destinationType);
+            if (destinationType == null)
+                throw new ArgumentNullException("destinationType null");
+            else if (destinationType.Equals(typeof(byte[])))
+                return true;
+            else
+                return false;
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
+            if (destinationType.Equals(typeof(byte[])))
+                return true;
             return base.CanConvertTo(context, destinationType);
         }
 
-        public bool CanConvertFrom(Type? sourceType)
+        public new bool CanConvertFrom(Type sourceType)
         {
-            return base.CanConvertFrom(sourceType);
+            if (sourceType == null)
+                throw new ArgumentNullException("sourceType Null");
+            else if (sourceType.Equals(typeof(String)))
+                return true;
+            else
+                return false;
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
+      
+            if (sourceType.Equals(typeof(String)))
+                return true;
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public object? ConvertTo(object? value, Type destinationType)
-        {
-            return ConvertTo((byte[])value);
-        }
+        public new object ConvertTo(object value, Type destinationType) => ConvertTo((byte[])value);
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
@@ -47,7 +59,7 @@ namespace p99FileUpdater.Converters
             return sb.ToString();
         }
 
-        public object? ConvertFrom(object value)
+        public new object ConvertFrom(object value)
         {
             return ConvertFrom((string)value);
         }
