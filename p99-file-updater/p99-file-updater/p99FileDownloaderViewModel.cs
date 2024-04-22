@@ -22,13 +22,28 @@ namespace p99FileUpdater
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        
         private async void DownloadFile()
         {
-            WriteToTextBoxWithString("creating httpclient");
-            DownloadClient = new HttpClient();
+            MessageBox = String.Empty;
+            try
+            {
+                MessageDisplayed = true;
+                WriteToTextBoxWithString("creating httpclient");
+                DownloadClient = new HttpClient();
 
-            WriteToTextBoxWithString("creating Uri Object");
-            DownloadAddress = new Uri(UrlToDownloadFrom);
+                WriteToTextBoxWithString("creating Uri Object");
+                DownloadAddress = new Uri(UrlToDownloadFrom);
+            }
+            catch(Exception ex)
+            {
+                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.Message }));
+                return;
+            }
+            finally
+            {
+                MessageDisplayed = false;
+            }
             try
             {
                 WriteToTextBoxWithString("creating stream object");
@@ -86,9 +101,12 @@ namespace p99FileUpdater
             }
             catch (Exception ex)
             {
-                MessageBox = ex.Message;
+                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.Message }));
             }
-
+            finally
+            {
+                MessageDisplayed = false;
+            }
             void setStreamAtInitialPosition(ref MemoryStream stream)
             {
                 stream.Position = 0;
