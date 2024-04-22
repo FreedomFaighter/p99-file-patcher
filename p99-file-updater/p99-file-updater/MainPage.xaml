@@ -16,7 +16,7 @@
         <TextBox x:Name="txtHelloWorld" 
                  HorizontalAlignment="Left" Margin="177,64,0,0" TextWrapping="Wrap" Text="{Binding MessageBox, Mode=OneWay}" 
                  VerticalAlignment="Top" Height="136" Width="435" RenderTransformOrigin="0.503,0.594" IsReadOnly="True" Header="Status" />
-        <Button x:Name="Download_Files" 
+        <Button x:Name="Download_Files" IsEnabled="{Binding MessageDisplayed}"
                 Content="Download Project 1999 Update files" Margin="177,212,0,0" VerticalAlignment="Top" Height="39" Width="435" Command="{Binding DownloadFromSetURI}" IsTabStop="True" TabIndex="1" />
         <TextBox HorizontalAlignment="Left" Margin="177,488,0,0" 
                  Text="{Binding ChecksumHashFromFileUrl, Mode=OneWay, Converter={StaticResource ChecksumByteToStringConverter}}" VerticalAlignment="Top" Width="656" 
