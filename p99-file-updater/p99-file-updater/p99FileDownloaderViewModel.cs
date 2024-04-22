@@ -34,18 +34,6 @@ namespace p99FileUpdater
 
                 WriteToTextBoxWithString("creating Uri Object");
                 DownloadAddress = new Uri(UrlToDownloadFrom);
-            }
-            catch(Exception ex)
-            {
-                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.Message }));
-                return;
-            }
-            finally
-            {
-                MessageDisplayed = false;
-            }
-            try
-            {
                 WriteToTextBoxWithString("creating stream object");
                 using (Stream response = await DownloadClient.GetStreamAsync(DownloadAddress))
                 {
