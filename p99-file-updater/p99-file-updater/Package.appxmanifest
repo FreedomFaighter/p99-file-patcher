@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
 	<Identity
-	  Name="05123feb-bfd2-40d1-85ac-ca848948ee88"
+	  Name="project1999FileUpdater"
 	  Publisher="CN=johnh"
-	  Version="1.0.0.0" />
+	  Version="1.0.1.0" />
 
-	<mp:PhoneIdentity PhoneProductId="05123feb-bfd2-40d1-85ac-ca848948ee88" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+	<mp:PhoneIdentity PhoneProductId="3504DF97-E510-41B7-857A-1628AF4BA3CC" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
 	<Properties>
-		<DisplayName>Hello World UWP</DisplayName>
+		<DisplayName>project1999FileUpdater</DisplayName>
 		<PublisherDisplayName>John H. Freeman</PublisherDisplayName>
 		<Logo>Assets\StoreLogo.png</Logo>
 	</Properties>
@@ -30,12 +30,12 @@
 	<Applications>
 		<Application Id="App"
 		  Executable="$targetnametoken$.exe"
-		  EntryPoint="HelloWorld.App">
+		  EntryPoint="p99FileUpdater.App">
 			<uap:VisualElements
-			  DisplayName="UWP Hello World"
+			  DisplayName="P99 Zip File Downloader"
 			  Square150x150Logo="Assets\Square150x150Logo.png"
 			  Square44x44Logo="Assets\Square44x44Logo.png"
-			  Description="Hello World"
+			  Description="p99 patch file downloader"
 			  BackgroundColor="transparent">
 				<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
 					<uap:ShowNameOnTiles>
@@ -47,4 +47,7 @@
 			</uap:VisualElements>
 		</Application>
 	</Applications>
+
+	<Capabilities>
+		<Capability Name="internetClient"/></Capabilities>
 </Package>

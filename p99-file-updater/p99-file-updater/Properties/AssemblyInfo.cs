@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Hello World")]
-[assembly: AssemblyDescription("sample C# and XAML app in Universal Windows Presentation")]
+[assembly: AssemblyTitle("Project 1999 File Updater")]
+[assembly: AssemblyDescription("Updates the files by checking project 1999 website and comparing them against already installed files")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Hello-World")]
-[assembly: AssemblyCopyright("Copyright © 2024")]
+[assembly: AssemblyProduct("Project 199 File Updater")]
+[assembly: AssemblyCopyright("John H. Freeman © 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
