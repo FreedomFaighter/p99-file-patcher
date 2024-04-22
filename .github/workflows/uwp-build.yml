@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      HWTestLibraryPath: '.\Hello-World\p99-file-updater-NUnit-Test\bin\x64\Release\p99-file-updater-NUnit-Test.exe'
+      HWTestLibraryPath: '.\p99-file-updater\p99-file-updater-NUnit-Test\bin\x64\Release\p99-file-updater-NUnit-Test.exe'
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
