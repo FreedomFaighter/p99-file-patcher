@@ -2,7 +2,3 @@
 	path = RelayCommand
 	url = https://github.com/FreedomFaighter/RelayCommand.git
 	branch = ms-example
-
-[submodule "libgit2sharp"]
-	path = libgit2sharp
-	url = https://github.com/FreedomFaighter/libgit2sharp.git

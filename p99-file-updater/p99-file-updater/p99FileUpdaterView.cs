@@ -14,11 +14,9 @@ namespace p99FileUpdater
 
         //Dictionary<String, Tuple<String, String>> listOfFilesFromURI { get; set; }
 
-        public String checksumHashFromFileUrl;
+        public byte[] checksumHashFromFileUrl, checksumHashFromApp;
 
-        public String checksumHashFromApp;
-
-        public bool? overrideChecsumValidation = false;
+        public bool? overrideChecksumValidation = false;
 
         public bool? messageDisplayed = false;
 
