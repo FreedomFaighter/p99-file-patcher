@@ -24,11 +24,17 @@ namespace p99FileUpdater
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private async void DownloadFile()
         {
+            try{
             WriteToTextBoxWithString("creating httpclient");
             DownloadClient = new HttpClient();
 
             WriteToTextBoxWithString("creating Uri Object");
             DownloadAddress = new Uri(UrlToDownloadFrom);
+            }
+            catch(Exception ex)
+            {
+                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.ToString() }));
+            }
             try
             {
                 WriteToTextBoxWithString("creating stream object");
