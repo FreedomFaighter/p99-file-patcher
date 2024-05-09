@@ -7,7 +7,6 @@ using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.IO.Compression;
-using System.Text;
 
 namespace p99FileUpdater
 {
@@ -73,7 +72,17 @@ namespace p99FileUpdater
                                 if (!fileInMemoryHash.Equals(currentByteHash))
                                 {
                                     WriteToTextBoxWithString(String.Format("{1} checksum does not match", zae.FullName));
-                                    zae.Open().CopyTo((new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write)));
+                                    FileStream zipFileArchiveStream = zae.Open() as FileStream;
+                                    FileStream fileThatMaybeOverwritten = new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+                                    if (zipFileArchiveStream.CanRead && !zipFileArchiveStream.Equals(fileThatMaybeOverwritten))
+                                    {
+                                        WriteToTextBoxWithString(string.Format("{1} is not an exact mismatch and is being overwritten.", fileThatMaybeOverwritten.Name));
+                                        if (fileThatMaybeOverwritten.CanWrite)
+                                        {
+                                            WriteToTextBoxWithString(string.Format("{1} can be written to an attempting to write with {2}", fileThatMaybeOverwritten.Name, zipFileArchiveStream));
+                                            zipFileArchiveStream.CopyTo(fileThatMaybeOverwritten);
+                                        }
+                                    }
                                 }
                                 else
                                 {
