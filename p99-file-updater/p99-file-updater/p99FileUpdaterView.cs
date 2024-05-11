@@ -22,8 +22,6 @@ namespace p99FileUpdater
 
         public String messages = String.Empty;
 
-        public Hashtable fileAndChecksum = new Hashtable();
-
         public MemoryStream memoryStream;
 
         public Uri downloadAddress;
