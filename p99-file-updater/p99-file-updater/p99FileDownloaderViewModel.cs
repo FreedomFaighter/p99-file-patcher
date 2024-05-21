@@ -91,7 +91,7 @@ namespace p99FileUpdater
                             }
                         }
                     }
-                    WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
+                    //WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
 
                     WriteToTextBoxWithString(String.Join(",", "Length of stream", memoryStream.Length));
                 }
