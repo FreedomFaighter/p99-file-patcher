@@ -14,7 +14,7 @@ namespace p99FileUpdater
     {
         public ICommand DownloadFromSetURI { get; }
 
-        private p99FileUpdaterView p99fuv = new p99FileUpdaterView();
+        private p99FileUpdaterModel p99fuv = new p99FileUpdaterModel();
         private void WriteToTextBoxWithString(String message)
         {
             MessageBox += String.Join(String.Empty, new String[] { message, "\n" });
@@ -91,7 +91,7 @@ namespace p99FileUpdater
                             }
                         }
                     }
-                    WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
+                    //WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
 
                     WriteToTextBoxWithString(String.Join(",", "Length of stream", memoryStream.Length));
                 }
