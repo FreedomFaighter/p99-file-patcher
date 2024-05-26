@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace p99FileUpdater
 {
-    public class p99FileUpdaterView
+    public class p99FileUpdaterModel
     {
         public String UpdateFileURI;
 

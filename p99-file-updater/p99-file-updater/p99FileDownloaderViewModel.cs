@@ -14,7 +14,7 @@ namespace p99FileUpdater
     {
         public ICommand DownloadFromSetURI { get; }
 
-        private p99FileUpdaterView p99fuv = new p99FileUpdaterView();
+        private p99FileUpdaterModel p99fuv = new p99FileUpdaterModel();
         private void WriteToTextBoxWithString(String message)
         {
             MessageBox += String.Join(String.Empty, new String[] { message, "\n" });
