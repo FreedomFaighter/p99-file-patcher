@@ -90,7 +90,7 @@ namespace p99FileUpdater
                                 byte[] currentByteHash = SHA256.Create().ComputeHash(new FileStream(currentFilePath, FileMode.Open, FileAccess.Read));
                                 if (!fileInMemoryHash.Equals(currentByteHash))
                                 {
-                                    WriteToTextBoxWithString(String.Format("{1} checksum does not match", zae.FullName));
+                                    WriteToTextBoxWithString($"{zae.FullName} checksum does not match");
                                     FileStream zipFileArchiveStream = zae.Open() as FileStream;
                                     FileStream fileThatMaybeOverwritten = new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write);
                                     if (zipFileArchiveStream.CanRead && !zipFileArchiveStream.Equals(fileThatMaybeOverwritten))
