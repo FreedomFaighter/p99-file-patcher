@@ -7,6 +7,7 @@ using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.IO.Compression;
+using System.Linq;
 
 namespace p99FileUpdater
 {
@@ -36,7 +37,16 @@ namespace p99FileUpdater
         
         private async void DownloadFile()
         {
-            MessageBox = String.Empty;
+            if (MessageBox != String.Empty)
+                MessageBox = String.Empty;
+            WriteToTextBoxWithString($"Operation Enabled: {OperationEnabled.ToString()}");
+            if (OperationEnabled == false)
+                OperationEnabled = true;
+            else
+                return;
+            WriteToTextBoxWithString($"Operation status: {OperationEnabled.ToString()}.");
+            if (ChecksumHashFromFileUrl != default)
+                ChecksumHashFromFileUrl = default;
             try
             {
                 WriteToTextBoxWithString("creating httpclient");
@@ -48,7 +58,7 @@ namespace p99FileUpdater
                 {
                     MemoryStream memoryStream = new MemoryStream();
                     await response.CopyToAsync(memoryStream);
-                    WriteToTextBoxWithString(String.Join(String.Empty, "Length of stream", memoryStream.Length));
+                    WriteToTextBoxWithString($"Length of stream {memoryStream.Length}.");
 
                     using (SHA256 memorySha = SHA256.Create())
                     {
@@ -56,21 +66,21 @@ namespace p99FileUpdater
 
                         if (OverrideChecksumValidation.HasValue && !OverrideChecksumValidation.Value)
                         {
-                            if (ChecksumHashFromFileUrl.Equals(ChecksumHashFromApp))
+                            if (Enumerable.Range(0, ChecksumHashFromApp.Length).All(i => ChecksumHashFromApp[i] == ChecksumHashFromFileUrl[i]))
                             {
                                 WriteToTextBoxWithString("Checksum values from hashed file match");
                             }
                             else
                             {
-                                WriteToTextBoxWithString("Checksum values from hashed file match do not match, exiting download and validation.");
+                                WriteToTextBoxWithString("Checksum values from hashed file do not match, exiting download and validation.");
                                 return;
                             }
                         }
                         //memoryStream is reset to position zero to be read as zip archive after checksuming
                         setStreamAtInitialPosition(ref memoryStream);
-
+                        //ZipArchive is used too read the in memory stream of files
                         ZipArchive za = new ZipArchive(memoryStream, ZipArchiveMode.Read);
-
+                        //loop through each entry in the ZipArchive
                         foreach (ZipArchiveEntry zae in za.Entries)
                         {
                             byte[] fileInMemoryHash = memorySha.ComputeHash(zae.Open());
@@ -81,27 +91,26 @@ namespace p99FileUpdater
                                 byte[] currentByteHash = SHA256.Create().ComputeHash(new FileStream(currentFilePath, FileMode.Open, FileAccess.Read));
                                 if (!fileInMemoryHash.Equals(currentByteHash))
                                 {
-                                    WriteToTextBoxWithString(String.Format("{1} checksum does not match", zae.FullName));
+                                    WriteToTextBoxWithString($"{zae.FullName} checksum does not match");
                                     FileStream zipFileArchiveStream = zae.Open() as FileStream;
                                     FileStream fileThatMaybeOverwritten = new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write);
                                     if (zipFileArchiveStream.CanRead && !zipFileArchiveStream.Equals(fileThatMaybeOverwritten))
                                     {
-                                        WriteToTextBoxWithString(string.Format("{1} is not an exact mismatch and is being overwritten.", fileThatMaybeOverwritten.Name));
+                                        WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} is not an exact mismatch and is being overwritten.");
                                         if (fileThatMaybeOverwritten.CanWrite)
                                         {
-                                            WriteToTextBoxWithString(string.Format("{1} can be written to an attempting to write with {2}", fileThatMaybeOverwritten.Name, zipFileArchiveStream));
+                                            WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} can be written to an attempting to write with {zipFileArchiveStream.Name}");
                                             zipFileArchiveStream.CopyTo(fileThatMaybeOverwritten);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    WriteToTextBoxWithString(String.Format("{1} checksum matches, not writing to file"));
+                                    WriteToTextBoxWithString($"{currentFilePath} checksum matches, not writing to file");
                                 }
                             }
                         }
                     }
-                    //WriteToTextBoxWithString(String.Join(":", "Number of Entries in Zip File", p99fuv.fileAndChecksum.Count.ToString()));
 
                     WriteToTextBoxWithString(String.Join(",", "Length of stream", memoryStream.Length));
                 }
@@ -160,5 +169,6 @@ namespace p99FileUpdater
         public byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
         public bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
         public Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
+        public bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue ? !p99fuv.operationEnabled.Value : false; }
     }
 }

@@ -17,7 +17,7 @@
         <TextBox x:Name="txtHelloWorld" 
                  HorizontalAlignment="Left" Margin="177,64,0,0" TextWrapping="Wrap" Text="{Binding MessageBox, Mode=OneWay}" 
                  VerticalAlignment="Top" Height="136" Width="435" RenderTransformOrigin="0.503,0.594" IsReadOnly="True" Header="Status" />
-        <Button x:Name="Download_Files" IsEnabled="{Binding MessageDisplayed}"
+        <Button x:Name="Download_Files" IsEnabled="{Binding DisableDownloadButton}"
                 Content="Download Project 1999 Update files" Margin="177,212,0,0" VerticalAlignment="Top" Height="39" Width="435" Command="{Binding DownloadFromSetURI}" IsTabStop="True" TabIndex="1" />
         <TextBox HorizontalAlignment="Left" Margin="177,488,0,0" 
                  Text="{Binding ChecksumHashFromFileUrl, Mode=OneWay, Converter={StaticResource ChecksumByteToStringConverter}}" VerticalAlignment="Top" Width="656" 
@@ -30,5 +30,13 @@
                  VerticalAlignment="Top" Width="435" IsReadOnly="False" Height="61" Header="URL" TabIndex="9" InputScope="Text" />
         <TextBox HorizontalAlignment="Left" Margin="177,576,0,0" Text="{Binding Mode=TwoWay, Path=ChecksumHashFromApp, Converter={StaticResource ChecksumByteToStringConverter}}" 
                  VerticalAlignment="Top" Width="656" IsReadOnly="False" Height="55" Header="Provided SHA256" TabIndex="4" InputScope="Text" />
+        <ProgressRing IsActive="{Binding Mode=OneWay, Path=OperationEnabled}" Width="100" Height="100" Margin="177, 600,0,0" FocusVisualPrimaryBrush="#FFD82424" >
+            <ProgressRing.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressRing.Foreground>
+        </ProgressRing>
     </Grid>
 </Page>
