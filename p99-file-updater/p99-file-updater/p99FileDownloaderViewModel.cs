@@ -7,6 +7,7 @@ using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.IO.Compression;
+using System.Linq;
 
 namespace p99FileUpdater
 {
@@ -65,7 +66,7 @@ namespace p99FileUpdater
 
                         if (OverrideChecksumValidation.HasValue && !OverrideChecksumValidation.Value)
                         {
-                            if (ChecksumHashFromApp.Equals(ChecksumHashFromFileUrl))
+                            if (Enumerable.Range(0, ChecksumHashFromApp.Length).All(i => ChecksumHashFromApp[i] == ChecksumHashFromFileUrl[i]))
                             {
                                 WriteToTextBoxWithString("Checksum values from hashed file match");
                             }
@@ -169,5 +170,6 @@ namespace p99FileUpdater
         public byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
         public bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
         public Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
+        public bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue ? !p99fuv.operationEnabled.Value : false; }
     }
 }
