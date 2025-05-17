@@ -11,7 +11,8 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      projectTestPath: '.\p99-file-updater\p99-file-updater-NUnit-Test\bin\x64\Release\p99-file-updater-NUnit-Test.exe'
+      projectTestFile: '.\p99-file-updater\p99-file-updater-Test\p99-file-updater-Test.csproj'
+      projectTestPath: '.\p99-file-updater\p99-file-updater-Test\bin\x64\Release\p99-file-updater-Test.exe'
       buildConfiguration: 'Release'
       projectPath: '.\p99-file-updater\p99-file-updater.sln'
       
@@ -31,5 +32,6 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
       - name: Build App
         run: msbuild -property:Configuration=${{env.buildConfiguration}} ${{env.projectPath}}
+      - run: nuget restore ${{env.projectTestFile}}
       - name: Test App
         run: ${{env.projectTestPath}}
