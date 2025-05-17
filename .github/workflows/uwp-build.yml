@@ -26,8 +26,7 @@ jobs:
         uses: nuget/setup-nuget@v2
         with: 
           nuget-version: '6.13.*'
-      - name: Run NuGet to restore the dependencies for the project
-	run: nuget restore ${{env.projectPath}}
+      - run: nuget restore ${{env.projectPath}}
       - name: Setup MSBuild v1.1
         uses: microsoft/setup-msbuild@v1.1
       - name: Build App
