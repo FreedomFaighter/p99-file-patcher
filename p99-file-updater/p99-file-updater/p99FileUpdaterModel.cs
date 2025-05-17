@@ -8,6 +8,15 @@ namespace p99FileUpdater
 {
     public class p99FileUpdaterModel
     {
+        internal p99FileUpdaterModel() {
+            EQDirectoryPath = default;
+            checksumHashFromApp = default;
+            checksumHashFromFileUrl = default;
+            overrideChecksumValidation = false;
+            operationEnabled = false;
+            messages = String.Empty;
+            downloadAddress = default;
+        }
         public String EQDirectoryPath;
 
         //Dictionary<String, Tuple<String, String>> listOfFilesFromURI { get; set; }

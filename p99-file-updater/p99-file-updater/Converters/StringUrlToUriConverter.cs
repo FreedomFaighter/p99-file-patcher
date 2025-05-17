@@ -5,15 +5,15 @@ namespace p99FileUpdater.Converters
 {
     internal class StringUrlToUriConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {   if(value != null)
-                return new Uri((String)value);
+        public object Convert(object convertValue, Type targetType, object parameter, string language)
+        {   if(convertValue != null)
+                return new Uri((String)convertValue).OriginalString;
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        public object ConvertBack(object convertBackValue, Type targetType, object parameter, string language)
         {
-            return ((Uri)value).OriginalString;
+            return new Uri((String)convertBackValue);
         }
     }
 }
