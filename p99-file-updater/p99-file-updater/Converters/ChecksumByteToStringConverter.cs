@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.UI.Xaml.Data;
 

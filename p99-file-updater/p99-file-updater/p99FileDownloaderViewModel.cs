@@ -117,13 +117,12 @@ namespace p99FileUpdater
             }
             catch (Exception ex)
             {
-                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.Message, ex.StackTrace }));
+                WriteToTextBoxWithString(String.Join(":", new String[] { "Exception", ex.Message }));
             }
             finally
             {
                 OperationEnabled = false;
             }
-            
             void setStreamAtInitialPosition(ref MemoryStream stream)
             {
                 stream.Position = 0;
