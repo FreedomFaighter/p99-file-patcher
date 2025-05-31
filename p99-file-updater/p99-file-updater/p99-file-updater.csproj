@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ChecksumByteToStringConverter.cs" />
+    <Compile Include="Converters\ChecksumByteToStringConverterSHA256.cs" />
     <Compile Include="Converters\StringUrlToUriConverter.cs" />
     <Compile Include="IP99DownloaderView.cs" />
     <Compile Include="p99FileDownloaderViewModel.cs" />

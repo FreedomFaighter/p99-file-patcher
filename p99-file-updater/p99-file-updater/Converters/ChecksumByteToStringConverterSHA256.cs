@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace p99FileUpdater.Converters
 {
-    internal class ChecksumByteToStringConverter : IValueConverter
+    internal class ChecksumByteToStringConverterSHA256 : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

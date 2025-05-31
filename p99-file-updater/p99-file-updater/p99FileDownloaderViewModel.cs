@@ -83,30 +83,37 @@ namespace p99FileUpdater
                         //loop through each entry in the ZipArchive
                         foreach (ZipArchiveEntry zae in za.Entries)
                         {
-                            byte[] fileInMemoryHash = memorySha.ComputeHash(zae.Open());
+                            //output name of zip file entry
                             WriteToTextBoxWithString(String.Join(":", "Zip Entry", zae.FullName));
-                            String currentFilePath = Path.Combine($"{EQDirectoryPath}{Path.DirectorySeparatorChar}{zae.FullName}");
-                            if (Directory.Exists(EQDirectoryPath) && File.Exists(currentFilePath))
-                            {
-                                byte[] currentByteHash = SHA256.Create().ComputeHash(new FileStream(currentFilePath, FileMode.Open, FileAccess.Read));
-                                if (!fileInMemoryHash.Equals(currentByteHash))
+                            //assign full path of file to be written in the EQ install directory to a local variable
+                            
+                            if (Directory.Exists(EQDirectoryPath))
+                            {//evaluate if the directory path exists and if the file exists to overwrite
+                                String currentFilePath = Path.Combine($"{EQDirectoryPath}{Path.DirectorySeparatorChar}{zae.FullName}");
+                                if (File.Exists(currentFilePath))
                                 {
-                                    WriteToTextBoxWithString($"{zae.FullName} checksum does not match");
-                                    FileStream zipFileArchiveStream = zae.Open() as FileStream;
-                                    FileStream fileThatMaybeOverwritten = new FileStream(currentFilePath, FileMode.OpenOrCreate, FileAccess.Write);
-                                    if (zipFileArchiveStream.CanRead && !zipFileArchiveStream.Equals(fileThatMaybeOverwritten))
+                                    //checksum memory stream at each entry and assign to byte array
+                                    byte[] fileInMemoryHash = memorySha.ComputeHash(zae.Open());
+                                    byte[] currentByteHash = SHA256.Create().ComputeHash(new FileStream(currentFilePath, FileMode.Open, FileAccess.Read));
+                                    if (!fileInMemoryHash.Equals(currentByteHash))
                                     {
-                                        WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} is not an exact mismatch and is being overwritten.");
-                                        if (fileThatMaybeOverwritten.CanWrite)
+                                        WriteToTextBoxWithString($"{zae.FullName} checksum does not match");
+                                        FileStream zipFileArchiveStream = zae.Open() as FileStream;
+                                        FileStream fileThatMaybeOverwritten = new FileStream(currentFilePath, FileMode.Create, FileAccess.Write);
+                                        if (zipFileArchiveStream.CanRead && !zipFileArchiveStream.Equals(fileThatMaybeOverwritten))
                                         {
-                                            WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} can be written to an attempting to write with {zipFileArchiveStream.Name}");
-                                            zipFileArchiveStream.CopyTo(fileThatMaybeOverwritten);
+                                            WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} is not an exact mismatch and is being overwritten.");
+                                            if (fileThatMaybeOverwritten.CanWrite)
+                                            {
+                                                WriteToTextBoxWithString($"{fileThatMaybeOverwritten.Name} can be written to an attempting to write with {zipFileArchiveStream.Name}");
+                                                zipFileArchiveStream.CopyTo(fileThatMaybeOverwritten);
+                                            }
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    WriteToTextBoxWithString($"{currentFilePath} checksum matches, not writing to file");
+                                    else
+                                    {
+                                        WriteToTextBoxWithString($"{currentFilePath} checksum matches, not writing to file");
+                                    }
                                 }
                             }
                         }
@@ -149,16 +156,6 @@ namespace p99FileUpdater
                 return true;
             }
 
-            return false;
-        }
-
-        bool EnableUpdateButton()
-        {
-            if (Directory.Exists(p99fuv.EQDirectoryPath) && DownloadAddress.AbsolutePath != String.Empty)
-            {
-                return true;
-            }
-            else
             return false;
         }
 
