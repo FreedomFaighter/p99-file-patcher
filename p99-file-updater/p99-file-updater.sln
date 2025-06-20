@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34804.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p99-file-updater", "p99-file-updater\p99-file-updater.csproj", "{37099CA7-0B63-4267-9A72-DF8FC094CF63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p99-file-updater-NUnit-Test", "p99-file-updater-Test\p99-file-updater-NUnit-Test.csproj", "{5703224D-37B2-4669-92B1-00B7E5105923}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p99-file-updater-NUnit-Test", "p99-file-updater-NUnit-Test\p99-file-updater-NUnit-Test.csproj", "{5703224D-37B2-4669-92B1-00B7E5105923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
