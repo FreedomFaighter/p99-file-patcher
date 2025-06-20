@@ -24,11 +24,11 @@ namespace p99FileUpdater.Converters
             char[] str = ((String)value).ToCharArray();
             byte[] checksum = new byte[32];
             for (int i = 0; i < 32; i++)
-            {
+        {
                 String s = String.Concat(str[i*2], str[(i*2) + 1]);
                 byte b = System.Convert.ToByte(s, 16);
                 checksum[i] = b;
-            }
+        }
             return checksum;
         }
     }

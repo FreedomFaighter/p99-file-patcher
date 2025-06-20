@@ -29,3 +29,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.3.0")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en")]
+
+// Allows for access to internal members and methods from outside the project
+[assembly: InternalsVisibleTo("p99-file-updater-NUnit-Test")]
