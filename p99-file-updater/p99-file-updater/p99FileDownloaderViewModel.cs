@@ -38,7 +38,7 @@ namespace p99FileUpdater
         private async void DownloadFile()
         {
             if (MessageBox != String.Empty)
-                MessageBox = String.Empty;
+            MessageBox = String.Empty;
             WriteToTextBoxWithString($"Operation Enabled: {OperationEnabled.ToString()}");
             if (OperationEnabled == false)
                 OperationEnabled = true;
@@ -151,24 +151,13 @@ namespace p99FileUpdater
 
             return false;
         }
-
-        bool EnableUpdateButton()
-        {
-            if (Directory.Exists(p99fuv.EQDirectoryPath) && DownloadAddress.AbsolutePath != String.Empty)
-            {
-                return true;
-            }
-            else
-            return false;
-        }
-
-        public String MessageBox { get => p99fuv.messages; set => SetProperty(ref p99fuv.messages, value); }
-        public bool? OperationEnabled { get => p99fuv.operationEnabled; set => SetProperty(ref p99fuv.operationEnabled, value); }
-        public string EQDirectoryPath { get => p99fuv.EQDirectoryPath; set => SetProperty(ref p99fuv.EQDirectoryPath, value); }
-        public byte[] ChecksumHashFromFileUrl { get => p99fuv.checksumHashFromFileUrl; set => SetProperty(ref p99fuv.checksumHashFromFileUrl, value); }
-        public byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
-        public bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
-        public Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
-        public bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue ? !p99fuv.operationEnabled.Value : false; }
+        internal String MessageBox { get => p99fuv.messages; set => SetProperty(ref p99fuv.messages, value); }
+        internal bool? OperationEnabled { get => p99fuv.operationEnabled; set => SetProperty(ref p99fuv.operationEnabled, value); }
+        internal string EQDirectoryPath { get => p99fuv.EQDirectoryPath; set => SetProperty(ref p99fuv.EQDirectoryPath, value); }
+        internal byte[] ChecksumHashFromFileUrl { get => p99fuv.checksumHashFromFileUrl; set => SetProperty(ref p99fuv.checksumHashFromFileUrl, value); }
+        internal byte[] ChecksumHashFromApp { get => p99fuv.checksumHashFromApp; set => SetProperty(ref p99fuv.checksumHashFromApp, value); }
+        internal bool? OverrideChecksumValidation { get => p99fuv.overrideChecksumValidation; set => SetProperty(ref p99fuv.overrideChecksumValidation, value); }
+        internal Uri DownloadAddress { get => p99fuv.downloadAddress; set => SetProperty(ref p99fuv.downloadAddress, value); }
+        internal bool DisableDownloadButton { get => p99fuv.operationEnabled.HasValue ? !p99fuv.operationEnabled.Value : false; }
     }
 }

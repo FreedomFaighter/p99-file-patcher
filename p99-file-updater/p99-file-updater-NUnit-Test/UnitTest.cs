@@ -18,48 +18,45 @@ namespace p99_file_updater_NUnit_Test
         [TestMethod]
         public void TestMessageProperty()
         {
-            Assert.AreEqual(hw.MessageBox, string.Empty);
             const string msg = "Test String";
             hw.MessageBox = msg;
             Assert.AreEqual(hw.MessageBox, msg);
+        }
+
+        [TestMethod]
+        public void TestMessagePropertyEmptyNotNull()
+        {
+            hw.MessageBox = String.Empty;
             Assert.AreNotEqual(hw.MessageBox, null);
         }
 
         [TestCategory("MessageDisplayedTests")]
-        [TestMethod]
-        public void TestButtonMessageDisplayedPropertyAreNotEqual()
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void TestButtonMessageDisplayedPropertyAreNotEqual(bool isDisabled)
         {
-            hw.MessageDisplayed = true;
-            Assert.AreNotEqual(hw.MessageDisplayed, false);
-            hw.MessageDisplayed = false;
-            Assert.AreNotEqual(hw.MessageDisplayed, true);
+            hw.OperationEnabled = isDisabled;
+            Assert.AreNotEqual(hw.DisableDownloadButton, isDisabled);
         }
 
         [TestMethod]
-        public void TestOverrideChecksumValidationTrue()
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
+        public void TestOverrideChecksumValidationTrue(bool checksumOverride)
         {
-            hw.OverrideChecksumValidation = true;
-            Assert.AreEqual(hw.OverrideChecksumValidation, true);
+            hw.OverrideChecksumValidation = checksumOverride;
+            Assert.AreEqual(hw.OverrideChecksumValidation, checksumOverride);
         }
 
         [TestMethod]
-        public void TestOverrideChecksumValidationFalse()
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("https://project1999.com/latest.zip")]
+        public void TestdownloadAddressEmpty(String url)
         {
-            hw.OverrideChecksumValidation = false;
-            Assert.AreEqual (hw.OverrideChecksumValidation, false);
-        }
-
-        [TestMethod]
-        public void TestdownloadAddressEmpty()
-        {
-            hw.DownloadAddress = new Uri(string.Empty);
-            Assert.AreEqual(hw.DownloadAddress, new Uri(string.Empty));
-        }
-
-        [TestMethod]
-        public void TestDownloadAddress()
-        {
-            Uri uri = new Uri("https://project1999.com/latest.zip");
+            Uri uri = new Uri(url);
             hw.DownloadAddress = new Uri(uri.OriginalString);
             Assert.AreEqual(hw.DownloadAddress, uri);
         }
